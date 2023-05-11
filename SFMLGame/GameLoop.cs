@@ -21,16 +21,13 @@ namespace SFMLGame
 
         private Clock clock = new Clock();
 
-        static string currentDir;
         static string fontPath;
-        private int score = 0;
+
 
         private Font font;
 
         private Text text;
         
-
-
         public void Run()
         {
             Start();
@@ -39,10 +36,8 @@ namespace SFMLGame
                 Render();
                 CheckInput();
                 Update();
-                //Thread.Sleep(20);
             }
         }
-
         private void Start()
         {
             running = true;
@@ -50,15 +45,13 @@ namespace SFMLGame
             window = new RenderWindow(new VideoMode(windiwWidth, windowHeight), "Game window");
             window.DispatchEvents();
 
-            circle = new Circle(50);
+            circle = new Circle(50, window.Size);
 
-            currentDir = Directory.GetCurrentDirectory();
             fontPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Fonts", "arial.ttf");
 
-
             font = new Font(fontPath);
-            text = new Text("Hello, SFML!", font);
 
+            text = new Text("Hits: 0", font);
             text.CharacterSize = 24;
             text.FillColor = Color.White;
             text.Position = new Vector2f(100, 100);
@@ -70,19 +63,9 @@ namespace SFMLGame
 
             circle.Position += circle.velocity * seconds;
 
-            if (circle.Position.X < circle.Radius || circle.Position.X > window.Size.X - circle.Radius)
-            {
-                circle.velocity.X = -circle.velocity.X;
-                score++;
-                text.DisplayedString = "Hits: " + score;
-            }
-            if (circle.Position.Y < circle.Radius || circle.Position.Y > window.Size.Y - circle.Radius)
-            {
-                circle.velocity.Y = -circle.velocity.Y;
-                score++;
-                text.DisplayedString = "Hits: " + score;
-            }
+            text.DisplayedString = "Hits: " + circle.score;
 
+            circle.Update();
         }
         private void Render()
         {
