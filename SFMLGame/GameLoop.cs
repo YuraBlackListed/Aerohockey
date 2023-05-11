@@ -23,11 +23,13 @@ namespace SFMLGame
 
         static string fontPath;
 
-
         private Font font;
 
         private Text text;
-        
+
+        private Player player1;
+        private Player player2;
+
         public void Run()
         {
             Start();
@@ -55,7 +57,11 @@ namespace SFMLGame
             text.CharacterSize = 24;
             text.FillColor = Color.White;
             text.Position = new Vector2f(100, 100);
+
+            player1 = new Player(false, Color.White, window.Size, false);
+            player2 = new Player(false, Color.Green, window.Size, true);
         }
+
         private void Update()
         {
             Time deltaTime = clock.Restart();
@@ -66,19 +72,23 @@ namespace SFMLGame
             text.DisplayedString = "Hits: " + circle.score;
 
             circle.Update();
+
+            player1.Update();
+            player2.Update();
         }
         private void Render()
         {
             window.Clear(Color.Black);
             window.Draw(text);
             window.Draw(circle.Shape);
+            window.Draw(player1.Shape);
+            window.Draw(player2.Shape);
             window.Display();
         }
         private void CheckInput()
         {
-            //I messed up, I'd better use this
+            player1.CheckInput();
+            player2.CheckInput();
         }
-
     }
-
 }

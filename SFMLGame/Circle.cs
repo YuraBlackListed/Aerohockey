@@ -1,6 +1,5 @@
 ﻿using SFML.System;
 using SFML.Graphics;
-using SFML.Window;
 
 namespace SFMLGame
 {
@@ -47,7 +46,6 @@ namespace SFMLGame
 
         public void Update()
         {
-
             if (Position.X < Radius || Position.X > windowSize.X - Radius)
             {
                 velocity.X = -velocity.X;
