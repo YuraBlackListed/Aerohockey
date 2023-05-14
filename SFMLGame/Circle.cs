@@ -46,16 +46,27 @@ namespace SFMLGame
 
         public void Update()
         {
-            if (Position.X < Radius || Position.X > windowSize.X - Radius)
+
+            
+            if(Position.X < Radius || Position.X > windowSize.X - Radius || Position.Y < Radius || Position.Y > windowSize.Y - Radius)
             {
-                velocity.X = -velocity.X;
+                if (Position.X < Radius || Position.X > windowSize.X - Radius)
+                {
+                    ReverseVelocity(ref velocity.X);
+                }
+                if (Position.Y < Radius || Position.Y > windowSize.Y - Radius)
+                {
+                    ReverseVelocity(ref velocity.Y);
+                }
                 score++;
             }
-            if (Position.Y < Radius || Position.Y > windowSize.Y - Radius)
-            {
-                velocity.Y = -velocity.Y;
-                score++;
-            }
+
+            //I need help to remove this shit ^
         }
+        public void ReverseVelocity(ref float vertex)
+        {
+            vertex = -vertex;   
+        }
+
     }
 }

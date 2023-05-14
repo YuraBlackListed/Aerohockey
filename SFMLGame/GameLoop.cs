@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using SFML.System;
+﻿using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
 using System.IO;
@@ -21,7 +19,7 @@ namespace SFMLGame
 
         private Clock clock = new Clock();
 
-        static string fontPath;
+        private static string fontPath;
 
         private Font font;
 
