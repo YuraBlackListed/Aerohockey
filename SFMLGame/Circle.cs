@@ -3,36 +3,22 @@ using SFML.Graphics;
 
 namespace SFMLGame
 {
-    class Circle
+    class Circle : GameObject
     {
-
         public int score = 0;
 
-        public int Radius
+        private int Radius
         {
             get { return (int)shape.Radius; }
             set { shape.Radius = value; }
         }
 
         private CircleShape shape;
-        public CircleShape Shape
-        {
-            get { return shape; }
-            set { shape = value;}
-        }
-
-        private Vector2f position  = new Vector2f(400, 300);
-        public Vector2f Position
-        {
-            get { return position; }
-            set { position = value; shape.Position = position; }
-        }
-
-        public Vector2f velocity = new Vector2f(600, 400);
 
         private Vector2u windowSize;
 
-        public Circle(int _radius, Vector2u _windowSize)
+        public Circle(int _radius, Vector2u _windowSize, RenderWindow window)
+            : base(window)
         {
             windowSize = _windowSize;
 
@@ -41,31 +27,31 @@ namespace SFMLGame
             shape.FillColor = Color.Red;
 
             shape.Origin = new Vector2f(shape.Radius, shape.Radius);
-            shape.Position = position;
+
+            mesh = shape;
+
+            velocity = new Vector2f(600, 400);
+            mesh.Position = new Vector2f(400, 300);
         }
 
         public void Update()
         {
-
-            
-            if(Position.X < Radius || Position.X > windowSize.X - Radius || Position.Y < Radius || Position.Y > windowSize.Y - Radius)
+            if(Position.X < Radius && velocity.X < 0)
             {
-                if (Position.X < Radius || Position.X > windowSize.X - Radius)
-                {
-                    ReverseVelocity(ref velocity.X);
-                }
-                if (Position.Y < Radius || Position.Y > windowSize.Y - Radius)
-                {
-                    ReverseVelocity(ref velocity.Y);
-                }
-                score++;
+                velocity.X = -velocity.X;
             }
-
-            //I need help to remove this shit ^
-        }
-        public void ReverseVelocity(ref float vertex)
-        {
-            vertex = -vertex;   
+            if(Position.Y < Radius && velocity.Y < 0)
+            {
+                velocity.Y = -velocity.Y;
+            }
+            if(Position.X > windowSize.X - Radius && velocity.X > 0)
+            {
+                velocity.X = -velocity.X;
+            }
+            if(Position.Y > windowSize.Y - Radius && velocity.Y > 0)
+            {
+                velocity.Y = -velocity.Y;
+            }
         }
 
     }

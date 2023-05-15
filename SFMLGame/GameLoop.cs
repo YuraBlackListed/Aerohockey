@@ -13,7 +13,7 @@ namespace SFMLGame
         private const int windiwWidth = 1200;
         private const int windowHeight = 600;
 
-        private RenderWindow window;
+        private RenderWindow scene;
 
         private Circle circle;
 
@@ -42,10 +42,10 @@ namespace SFMLGame
         {
             running = true;
 
-            window = new RenderWindow(new VideoMode(windiwWidth, windowHeight), "Game window");
-            window.DispatchEvents();
+            scene = new RenderWindow(new VideoMode(windiwWidth, windowHeight), "Game window");
+            scene.DispatchEvents();
 
-            circle = new Circle(50, window.Size);
+            circle = new Circle(50, scene.Size, scene);
 
             fontPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Fonts", "arial.ttf");
 
@@ -56,8 +56,8 @@ namespace SFMLGame
             text.FillColor = Color.White;
             text.Position = new Vector2f(100, 100);
 
-            player1 = new Player(false, Color.White, window.Size, false);
-            player2 = new Player(false, Color.Green, window.Size, true);
+            player1 = new Player(false, Color.White, scene.Size, false);
+            player2 = new Player(false, Color.Green, scene.Size, true);
         }
 
         private void Update()
@@ -76,12 +76,15 @@ namespace SFMLGame
         }
         private void Render()
         {
-            window.Clear(Color.Black);
-            window.Draw(text);
-            window.Draw(circle.Shape);
-            window.Draw(player1.Shape);
-            window.Draw(player2.Shape);
-            window.Display();
+            scene.Clear(Color.Black);
+            scene.Draw(text);
+            scene.Draw(circle.mesh);
+            scene.Draw(player1.Shape);
+            scene.Draw(player2.Shape);
+
+            circle.Draw();
+
+            scene.Display();
         }
         private void CheckInput()
         {
