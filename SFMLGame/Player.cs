@@ -2,14 +2,11 @@
 using SFML.Graphics;
 using SFML.Window;
 
-
 namespace SFMLGame
 {
     class Player : GameObject
     {
         public int score { get; private set; } = 0;
-        public int roundWins { get; private set; } = 0;
-        public bool IsAI { get; private set; } = false;
 
         private float coordinateX;
 
@@ -20,7 +17,7 @@ namespace SFMLGame
 
         private Vector2u windowSize;
 
-        public Player(bool isAi, Color color, Vector2u _windowSize, bool left, RenderWindow window) : base(window)
+        public Player(Color color, Vector2u _windowSize, bool left, RenderWindow window) : base(window)
         {
             shape = new RectangleShape(new Vector2f(30f, 100f));
             if (left)
@@ -38,7 +35,6 @@ namespace SFMLGame
                 down = Keyboard.Key.Down;
             }
             shape.Origin = new Vector2f(shape.Size.X / 2f, shape.Size.Y / 2f);
-            IsAI = isAi;
 
             shape.FillColor = color;
 
@@ -52,11 +48,11 @@ namespace SFMLGame
             Position += velocity;
             velocity.Y = 0;
 
-            if(mesh.Position.Y < 90f)
+            if(Position.Y < 90f)
             {
                 Position = new Vector2f(coordinateX, 90f);
             }
-            else if(mesh.Position.Y > windowSize.Y - 90f)
+            else if(Position.Y > windowSize.Y - 90f)
             {
                 Position = new Vector2f(coordinateX, windowSize.Y - 90f);
             }

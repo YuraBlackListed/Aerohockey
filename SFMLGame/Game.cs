@@ -34,8 +34,8 @@ namespace SFMLGame
             text.FillColor = Color.White;
             text.Position = new Vector2f(100, 100);
 
-            player1 = new Player(false, Color.White, scene.Size, false, scene);
-            player2 = new Player(false, Color.Green, scene.Size, true, scene);
+            player1 = new Player(Color.Yellow, scene.Size, false, scene);
+            player2 = new Player(Color.Blue, scene.Size, true, scene);
         }
         public void Update(float time)
         {
