@@ -20,6 +20,9 @@ namespace SFMLGame
 
         private RenderWindow scene;
 
+        private float bounceTimer;
+        private bool counting;
+
         public Game(RenderWindow window)
         {
             scene = window;
@@ -37,9 +40,20 @@ namespace SFMLGame
 
             player1 = new Player(Color.Yellow, scene.Size, false, scene);
             player2 = new Player(Color.Blue, scene.Size, true, scene);
+
+            bounceTimer = 0;
         }
         public void Update(float time)
         {
+            if(counting)
+            {
+                bounceTimer += time;
+                if (bounceTimer >= 1)
+                {
+                    bounceTimer = 0;
+                    counting = false;
+                }
+            }
             circle.Position += circle.velocity * time;
             player1.Position += player1.velocity * time;
             player2.Position += player2.velocity * time;
@@ -54,13 +68,21 @@ namespace SFMLGame
 
             if (circle.mesh.GetGlobalBounds().Intersects(player1.mesh.GetGlobalBounds()))
             {
-                circle.BounceX();
-                circle.BounceY();
+                if(!counting)
+                {
+                    circle.BounceX();
+                    circle.BounceY();
+                    counting = true;
+                }
             }
             else if (circle.mesh.GetGlobalBounds().Intersects(player2.mesh.GetGlobalBounds()))
             {
-                circle.BounceX();
-                circle.BounceY();
+                if (!counting)
+                {
+                    circle.BounceX();
+                    circle.BounceY();
+                    counting = true;
+                }
             }
         }
         public void CheckInput()
