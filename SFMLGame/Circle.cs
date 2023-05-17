@@ -5,8 +5,6 @@ namespace SFMLGame
 {
     class Circle : GameObject
     {
-        public int score = 0;
-
         public int radius;
 
         private CircleShape shape;

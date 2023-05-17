@@ -50,7 +50,8 @@ namespace SFMLGame
         {
             scene.Clear(Color.Black);
 
-            scene.Draw(game.text);
+            scene.Draw(game.player1Score);
+            scene.Draw(game.player2Score);
 
             game.circle.Draw();
             game.player1.Draw();

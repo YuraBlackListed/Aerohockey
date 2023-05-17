@@ -1,7 +1,6 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 using System.IO;
-using System;
 
 namespace SFMLGame
 {
@@ -11,7 +10,8 @@ namespace SFMLGame
 
         private Font font;
 
-        public Text text;
+        public Text player1Score;
+        public Text player2Score;
 
         public Player player1;
         public Player player2;
@@ -36,10 +36,15 @@ namespace SFMLGame
 
             font = new Font(fontPath);
 
-            text = new Text("Hits: 0", font);
-            text.CharacterSize = 24;
-            text.FillColor = Color.White;
-            text.Position = new Vector2f(100, 100);
+            player1Score = new Text("Player 1: 0", font);
+            player1Score.CharacterSize = 24;
+            player1Score.FillColor = Color.White;
+            player1Score.Position = new Vector2f(100, 100);
+            
+            player2Score = new Text("Player 1: 0", font);
+            player2Score.CharacterSize = 24;
+            player2Score.FillColor = Color.White;
+            player2Score.Position = new Vector2f(window.Size.X - 300, 100);
 
             player1 = new Player(Color.Yellow, false, scene);
             player2 = new Player(Color.Blue, true, scene);
@@ -64,7 +69,8 @@ namespace SFMLGame
             player1.Position += player1.velocity * time;
             player2.Position += player2.velocity * time;
 
-            text.DisplayedString = "Hits: " + circle.score;
+            player1Score.DisplayedString = "Player1: " + player1.score;
+            player2Score.DisplayedString = "Player2: " + player2.score;
 
             circle.Update();
 
@@ -87,6 +93,23 @@ namespace SFMLGame
                 {
                     circle.BounceX();
                     circle.BounceY();
+                    counting = true;
+                }
+            }
+
+            if (circle.mesh.GetGlobalBounds().Intersects(gate1.mesh.GetGlobalBounds()))
+            {
+                if (!counting)
+                {
+                    gate1.PlayerScored();
+                    counting = true;
+                }
+            }
+            else if (circle.mesh.GetGlobalBounds().Intersects(gate2.mesh.GetGlobalBounds()))
+            {
+                if (!counting)
+                {
+                    gate2.PlayerScored();
                     counting = true;
                 }
             }
