@@ -5,45 +5,35 @@ using SFML.Window;
 
 namespace SFMLGame
 {
-    class Player
+    class Player : GameObject
     {
         public int score { get; private set; } = 0;
         public int roundWins { get; private set; } = 0;
         public bool IsAI { get; private set; } = false;
 
+        private float coordinateX;
+
         private Keyboard.Key up;
         private Keyboard.Key down;
 
-        private RectangleShape shape;
-        public RectangleShape Shape
-        {
-            get { return shape; }
-            set { shape = value; }
-        }
-
-        private Vector2f position = new Vector2f(400, 300);
-        public Vector2f Position
-        {
-            get { return position; }
-            set { position = value; shape.Position = position; }
-        }
-
-        public Vector2f velocity = new Vector2f(0, 0);
+        public RectangleShape shape;
 
         private Vector2u windowSize;
 
-        public Player(bool isAi, Color color, Vector2u _windowSize, bool left)
+        public Player(bool isAi, Color color, Vector2u _windowSize, bool left, RenderWindow window) : base(window)
         {
             shape = new RectangleShape(new Vector2f(30f, 100f));
             if (left)
             {
-                position = new Vector2f(50f, 300);
+                coordinateX = 50f;
+                shape.Position = new Vector2f(coordinateX, 300);
                 up = Keyboard.Key.W;
                 down = Keyboard.Key.S;
             }
             else
             {
-                position = new Vector2f(_windowSize.X - 50f, 300);
+                coordinateX = _windowSize.X - 50f;
+                shape.Position = new Vector2f(_windowSize.X - 50f, 300);
                 up = Keyboard.Key.Up;
                 down = Keyboard.Key.Down;
             }
@@ -51,6 +41,8 @@ namespace SFMLGame
             IsAI = isAi;
 
             shape.FillColor = color;
+
+            mesh = shape;
 
             windowSize = _windowSize;
         }
@@ -60,13 +52,13 @@ namespace SFMLGame
             Position += velocity;
             velocity.Y = 0;
 
-            if(position.Y < 90f)
+            if(mesh.Position.Y < 90f)
             {
-                position.Y = 90f;
+                Position = new Vector2f(coordinateX, 90f);
             }
-            else if(position.Y > windowSize.Y - 90f)
+            else if(mesh.Position.Y > windowSize.Y - 90f)
             {
-                position.Y = windowSize.Y - 90f;
+                Position = new Vector2f(coordinateX, windowSize.Y - 90f);
             }
         }
         public void CheckInput()
@@ -77,7 +69,7 @@ namespace SFMLGame
             }
             else if (Keyboard.IsKeyPressed(down))
             {
-                position.Y += 0.2f;
+                velocity.Y += 0.2f;
             }
         }
     }
