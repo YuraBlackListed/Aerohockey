@@ -1,6 +1,7 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 using System.IO;
+using System;
 
 namespace SFMLGame
 {
@@ -40,6 +41,8 @@ namespace SFMLGame
         public void Update(float time)
         {
             circle.Position += circle.velocity * time;
+            player1.Position += player1.velocity * time;
+            player2.Position += player2.velocity * time;
 
             text.DisplayedString = "Hits: " + circle.score;
 
@@ -47,6 +50,18 @@ namespace SFMLGame
 
             player1.Update();
             player2.Update();
+
+
+            if (circle.mesh.GetGlobalBounds().Intersects(player1.mesh.GetGlobalBounds()))
+            {
+                circle.BounceX();
+                circle.BounceY();
+            }
+            else if (circle.mesh.GetGlobalBounds().Intersects(player2.mesh.GetGlobalBounds()))
+            {
+                circle.BounceX();
+                circle.BounceY();
+            }
         }
         public void CheckInput()
         {

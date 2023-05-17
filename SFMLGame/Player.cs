@@ -17,9 +17,12 @@ namespace SFMLGame
 
         private Vector2u windowSize;
 
+        public float shapeSizeX = 30f;
+        public float shapeSizeY = 100f;
+
         public Player(Color color, Vector2u _windowSize, bool left, RenderWindow window) : base(window)
         {
-            shape = new RectangleShape(new Vector2f(30f, 100f));
+            shape = new RectangleShape(new Vector2f(shapeSizeX, shapeSizeY));
             if (left)
             {
                 coordinateX = 50f;
@@ -45,9 +48,6 @@ namespace SFMLGame
 
         public void Update()
         {
-            Position += velocity;
-            velocity.Y = 0;
-
             if(Position.Y < 90f)
             {
                 Position = new Vector2f(coordinateX, 90f);
@@ -61,11 +61,15 @@ namespace SFMLGame
         {
             if (Keyboard.IsKeyPressed(up))
             {
-                velocity.Y -= 0.2f;
+                velocity.Y = -300f;
             }
             else if (Keyboard.IsKeyPressed(down))
             {
-                velocity.Y += 0.2f;
+                velocity.Y = 300f;
+            }
+            else
+            {
+                velocity.Y = 0;
             }
         }
     }
