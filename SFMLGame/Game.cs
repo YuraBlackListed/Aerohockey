@@ -7,8 +7,6 @@ namespace SFMLGame
 {
     class Game
     {
-        public Circle circle;
-
         private static string fontPath;
 
         private Font font;
@@ -17,6 +15,11 @@ namespace SFMLGame
 
         public Player player1;
         public Player player2;
+
+        public Circle circle;
+
+        public Gate gate1;
+        public Gate gate2;
 
         private RenderWindow scene;
 
@@ -38,8 +41,11 @@ namespace SFMLGame
             text.FillColor = Color.White;
             text.Position = new Vector2f(100, 100);
 
-            player1 = new Player(Color.Yellow, scene.Size, false, scene);
-            player2 = new Player(Color.Blue, scene.Size, true, scene);
+            player1 = new Player(Color.Yellow, false, scene);
+            player2 = new Player(Color.Blue, true, scene);
+
+            gate1 = new Gate(player2, true, Color.Green, scene);
+            gate2 = new Gate(player1, false, Color.Green, scene);
 
             bounceTimer = 0;
         }

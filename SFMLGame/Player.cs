@@ -6,7 +6,7 @@ namespace SFMLGame
 {
     class Player : GameObject
     {
-        public int score { get; private set; } = 0;
+        public int score = 0;
 
         private float coordinateX;
 
@@ -20,7 +20,7 @@ namespace SFMLGame
         public float shapeSizeX = 30f;
         public float shapeSizeY = 100f;
 
-        public Player(Color color, Vector2u _windowSize, bool left, RenderWindow window) : base(window)
+        public Player(Color color, bool left, RenderWindow window) : base(window)
         {
             shape = new RectangleShape(new Vector2f(shapeSizeX, shapeSizeY));
             if (left)
@@ -32,8 +32,8 @@ namespace SFMLGame
             }
             else
             {
-                coordinateX = _windowSize.X - 50f;
-                shape.Position = new Vector2f(_windowSize.X - 50f, 300);
+                coordinateX = window.Size.X - 50f;
+                shape.Position = new Vector2f(window.Size.X - 50f, 300);
                 up = Keyboard.Key.Up;
                 down = Keyboard.Key.Down;
             }
@@ -43,7 +43,7 @@ namespace SFMLGame
 
             mesh = shape;
 
-            windowSize = _windowSize;
+            windowSize = window.Size;
         }
 
         public void Update()

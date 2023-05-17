@@ -49,11 +49,14 @@ namespace SFMLGame
         private void Render()
         {
             scene.Clear(Color.Black);
+
             scene.Draw(game.text);
 
             game.circle.Draw();
             game.player1.Draw();
             game.player2.Draw();
+            game.gate1.Draw();
+            game.gate2.Draw();
 
             scene.Display();
         }
