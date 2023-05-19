@@ -26,7 +26,7 @@ namespace SFMLGame
 
             shape.FillColor = color;
 
-            mesh = shape;
+            Mesh = shape;
         }
         public void PlayerScored()
         {

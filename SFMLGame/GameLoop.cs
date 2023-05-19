@@ -37,6 +37,7 @@ namespace SFMLGame
             scene.DispatchEvents();
 
             game = new Game(scene);
+            game.Start();
         }
 
         private void Update()
@@ -53,11 +54,8 @@ namespace SFMLGame
             scene.Draw(game.player1Score);
             scene.Draw(game.player2Score);
 
-            game.circle.Draw();
-            game.player1.Draw();
-            game.player2.Draw();
-            game.gate1.Draw();
-            game.gate2.Draw();
+
+            game.Render();
 
             scene.Display();
         }

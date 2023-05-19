@@ -29,7 +29,10 @@ namespace SFMLGame
         public Game(RenderWindow window)
         {
             scene = window;
+        }
 
+        public void Start()
+        {
             circle = new Circle(50, scene.Size, scene);
 
             fontPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Fonts", "arial.ttf");
@@ -40,11 +43,11 @@ namespace SFMLGame
             player1Score.CharacterSize = 24;
             player1Score.FillColor = Color.White;
             player1Score.Position = new Vector2f(100, 100);
-            
+
             player2Score = new Text("Player 1: 0", font);
             player2Score.CharacterSize = 24;
             player2Score.FillColor = Color.White;
-            player2Score.Position = new Vector2f(window.Size.X - 300, 100);
+            player2Score.Position = new Vector2f(scene.Size.X - 300, 100);
 
             player1 = new Player(Color.Yellow, false, scene);
             player2 = new Player(Color.Blue, true, scene);
@@ -65,9 +68,9 @@ namespace SFMLGame
                     counting = false;
                 }
             }
-            circle.Position += circle.velocity * time;
-            player1.Position += player1.velocity * time;
-            player2.Position += player2.velocity * time;
+            circle.Position += circle.Velocity * time;
+            player1.Position += player1.Velocity * time;
+            player2.Position += player2.Velocity * time;
 
             player1Score.DisplayedString = "Player1: " + player1.score;
             player2Score.DisplayedString = "Player2: " + player2.score;
@@ -78,7 +81,7 @@ namespace SFMLGame
             player2.Update();
 
 
-            if (circle.mesh.GetGlobalBounds().Intersects(player1.mesh.GetGlobalBounds()))
+            if (circle.Mesh.GetGlobalBounds().Intersects(player1.Mesh.GetGlobalBounds()))
             {
                 if(!counting)
                 {
@@ -87,7 +90,7 @@ namespace SFMLGame
                     counting = true;
                 }
             }
-            else if (circle.mesh.GetGlobalBounds().Intersects(player2.mesh.GetGlobalBounds()))
+            else if (circle.Mesh.GetGlobalBounds().Intersects(player2.Mesh.GetGlobalBounds()))
             {
                 if (!counting)
                 {
@@ -97,7 +100,7 @@ namespace SFMLGame
                 }
             }
 
-            if (circle.mesh.GetGlobalBounds().Intersects(gate1.mesh.GetGlobalBounds()))
+            if (circle.Mesh.GetGlobalBounds().Intersects(gate1.Mesh.GetGlobalBounds()))
             {
                 if (!counting)
                 {
@@ -105,7 +108,7 @@ namespace SFMLGame
                     counting = true;
                 }
             }
-            else if (circle.mesh.GetGlobalBounds().Intersects(gate2.mesh.GetGlobalBounds()))
+            else if (circle.Mesh.GetGlobalBounds().Intersects(gate2.Mesh.GetGlobalBounds()))
             {
                 if (!counting)
                 {
@@ -118,6 +121,14 @@ namespace SFMLGame
         {
             player1.CheckInput();
             player2.CheckInput();
+        }
+        public void Render()
+        {
+            circle.Draw();
+            player1.Draw();
+            player2.Draw();
+            gate1.Draw();
+            gate2.Draw();
         }
     }
 }

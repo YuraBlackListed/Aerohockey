@@ -41,7 +41,7 @@ namespace SFMLGame
 
             shape.FillColor = color;
 
-            mesh = shape;
+            Mesh = shape;
 
             windowSize = window.Size;
         }
@@ -61,15 +61,15 @@ namespace SFMLGame
         {
             if (Keyboard.IsKeyPressed(up))
             {
-                velocity.Y = -300f;
+                Velocity.Y = -300f;
             }
             else if (Keyboard.IsKeyPressed(down))
             {
-                velocity.Y = 300f;
+                Velocity.Y = 300f;
             }
             else
             {
-                velocity.Y = 0;
+                Velocity.Y = 0;
             }
         }
     }

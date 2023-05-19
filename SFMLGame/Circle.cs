@@ -23,38 +23,38 @@ namespace SFMLGame
 
             shape.Origin = new Vector2f(shape.Radius, shape.Radius);
 
-            mesh = shape;
+            Mesh = shape;
 
-            velocity = new Vector2f(600, 400);
-            mesh.Position = new Vector2f(400, 300);
+            Velocity = new Vector2f(600, 400);
+            Mesh.Position = new Vector2f(400, 300);
         }
 
         public void Update()
         {
-            if(Position.X < radius && velocity.X < 0)
+            if(Position.X < radius && Velocity.X < 0)
             {
                 BounceX();
             }
-            if(Position.Y < radius && velocity.Y < 0)
+            if(Position.Y < radius && Velocity.Y < 0)
             {
                 BounceY();
             }
-            if(Position.X > windowSize.X - radius && velocity.X > 0)
+            if(Position.X > windowSize.X - radius && Velocity.X > 0)
             {
                 BounceX();
             }
-            if(Position.Y > windowSize.Y - radius && velocity.Y > 0)
+            if(Position.Y > windowSize.Y - radius && Velocity.Y > 0)
             {
                 BounceY();
             }
         }
         public void BounceX()
         {
-            velocity.X = -velocity.X;
+            Velocity.X = -Velocity.X;
         }
         public void BounceY()
         {
-            velocity.Y = -velocity.Y;
+            Velocity.Y = -Velocity.Y;
         }
     }
 }

@@ -9,12 +9,12 @@ namespace SFMLGame
         public Vector2f Position
         {
             get { return position; }
-            set { position = value; mesh.Position = position; }
+            set { position = value; Mesh.Position = position; }
         }
 
-        public Vector2f velocity = new Vector2f(0, 0);
+        public Vector2f Velocity = new Vector2f(0, 0);
 
-        public Shape mesh;
+        public Shape Mesh;
         
         private RenderWindow scene;
 
@@ -25,7 +25,7 @@ namespace SFMLGame
 
         public void Draw()
         {
-            scene.Draw(mesh);
+            scene.Draw(Mesh);
         }
     }
 }
