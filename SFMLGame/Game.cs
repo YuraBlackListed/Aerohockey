@@ -1,17 +1,17 @@
 ﻿using SFML.System;
 using SFML.Graphics;
-using System.IO;
+using MyExtensionMethods;
+using TextExtentionMethods;
 
 namespace SFMLGame
 {
     class Game
     {
-        private static string fontPath;
-
+        private string fontName = "arial.ttf";
         private Font font;
 
-        public Text player1Score;
-        public Text player2Score;
+        public Text player1ScoreText;
+        public Text player2ScoreText;
 
         public Player player1;
         public Player player2;
@@ -35,19 +35,10 @@ namespace SFMLGame
         {
             circle = new Circle(50, scene.Size, scene);
 
-            fontPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Fonts", "arial.ttf");
+            font = font.LoadFromFile(fontName);
 
-            font = new Font(fontPath);
-
-            player1Score = new Text("Player 1: 0", font);
-            player1Score.CharacterSize = 24;
-            player1Score.FillColor = Color.White;
-            player1Score.Position = new Vector2f(100, 100);
-
-            player2Score = new Text("Player 1: 0", font);
-            player2Score.CharacterSize = 24;
-            player2Score.FillColor = Color.White;
-            player2Score.Position = new Vector2f(scene.Size.X - 300, 100);
+            player1ScoreText = player1ScoreText.SetupText("Player 1: 0", font, Color.White, 24, new Vector2f(100, 100));
+            player2ScoreText = player2ScoreText.SetupText("Player 2: 0", font, Color.White, 24, new Vector2f(scene.Size.X - 300, 100));
 
             player1 = new Player(Color.Yellow, false, scene);
             player2 = new Player(Color.Blue, true, scene);
@@ -72,8 +63,8 @@ namespace SFMLGame
             player1.Position += player1.Velocity * time;
             player2.Position += player2.Velocity * time;
 
-            player1Score.DisplayedString = "Player1: " + player1.score;
-            player2Score.DisplayedString = "Player2: " + player2.score;
+            player1ScoreText.DisplayedString = "Player1: " + player1.score;
+            player2ScoreText.DisplayedString = "Player2: " + player2.score;
 
             circle.Update();
 
@@ -130,5 +121,6 @@ namespace SFMLGame
             gate1.Draw();
             gate2.Draw();
         }
+
     }
 }
