@@ -11,16 +11,16 @@ namespace SFMLGame.Game
         private string fontName = "arial.ttf";
         private Font font;
 
-        public Text player1ScoreText;
-        public Text player2ScoreText;
+        public Text Player1ScoreText;
+        public Text Player2ScoreText;
 
-        public Player player1;
-        public Player player2;
+        public Player Player1;
+        public Player Player2;
 
-        public Circle circle;
+        public Circle Pircle;
 
-        public Gate gate1;
-        public Gate gate2;
+        public Gate Gate1;
+        public Gate Gate2;
 
         private RenderWindow scene;
 
@@ -31,62 +31,62 @@ namespace SFMLGame.Game
 
         public void Start()
         {
-            circle = new Circle(50, scene.Size, scene);
+            Pircle = new Circle(50, scene.Size, scene);
 
             font = font.LoadFromFile(fontName);
 
-            player1ScoreText = player1ScoreText.SetupText("Player 1: 0", font, Color.White, 24, new Vector2f(100, 100));
-            player2ScoreText = player2ScoreText.SetupText("Player 2: 0", font, Color.White, 24, new Vector2f(scene.Size.X - 300, 100));
+            Player1ScoreText = Player1ScoreText.SetupText("Player 1: 0", font, Color.White, 24, new Vector2f(100, 100));
+            Player2ScoreText = Player2ScoreText.SetupText("Player 2: 0", font, Color.White, 24, new Vector2f(scene.Size.X - 300, 100));
 
-            player1 = new Player(Color.Yellow, true, scene);
-            player2 = new Player(Color.Blue, false, scene);
+            Player1 = new Player(Color.Yellow, true, scene);
+            Player2 = new Player(Color.Blue, false, scene);
 
-            gate1 = new Gate(true, Color.Green, scene);
-            gate2 = new Gate(false, Color.Green, scene);
+            Gate1 = new Gate(true, Color.Green, scene);
+            Gate2 = new Gate(false, Color.Green, scene);
         }
         public void Update(float time)
         {
-            player1ScoreText.DisplayedString = "Player1: " + player1.Score;
-            player2ScoreText.DisplayedString = "Player2: " + player2.Score;
+            Player1ScoreText.DisplayedString = "Player1: " + Player1.Score;
+            Player2ScoreText.DisplayedString = "Player2: " + Player2.Score;
 
-            circle.Update(time);
+            Pircle.Update(time);
 
-            player1.Update(time);
-            player2.Update(time);
+            Player1.Update(time);
+            Player2.Update(time);
 
 
-            if (circle.CollidesWith(player1) && circle.Velocity.X < 0)
+            if (Pircle.CollidesWith(Player1) && Pircle.Velocity.X < 0)
             {
-                circle.BounceX();
+                Pircle.BounceX();
             }
-            else if (circle.CollidesWith(player2) && circle.Velocity.X > 0)
+            else if (Pircle.CollidesWith(Player2) && Pircle.Velocity.X > 0)
             {
-                circle.BounceX();
+                Pircle.BounceX();
             }
 
-            if (circle.CollidesWith(gate1) && circle.Velocity.X < 0)
+            if (Pircle.CollidesWith(Gate1) && Pircle.Velocity.X < 0)
             {
-                circle.BounceX();
-                player2.Score++;
+                Pircle.BounceX();
+                Player2.Score++;
             }
-            else if (circle.CollidesWith(gate2) && circle.Velocity.X > 0)
+            else if (Pircle.CollidesWith(Gate2) && Pircle.Velocity.X > 0)
             {
-                circle.BounceX();
-                player1.Score++;
+                Pircle.BounceX();
+                Player1.Score++;
             }
         }
         public void CheckInput()
         {
-            player1.CheckInput();
-            player2.CheckInput();
+            Player1.CheckInput();
+            Player2.CheckInput();
         }
         public void Render()
         {
-            circle.Draw();
-            player1.Draw();
-            player2.Draw();
-            gate1.Draw();
-            gate2.Draw();
+            Pircle.Draw();
+            Player1.Draw();
+            Player2.Draw();
+            Gate1.Draw();
+            Gate2.Draw();
         }
 
     }

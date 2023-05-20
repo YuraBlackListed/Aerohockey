@@ -6,7 +6,7 @@ namespace SFMLGame.Game
 {
     class Circle : GameObject
     {
-        public int radius;
+        public int Radius;
 
         private CircleShape shape;
 
@@ -19,7 +19,7 @@ namespace SFMLGame.Game
 
             shape = new CircleShape(1);
             shape.Radius = _radius;
-            radius = _radius;
+            Radius = _radius;
             shape.FillColor = Color.Red;
 
             shape.Origin = new Vector2f(shape.Radius, shape.Radius);
@@ -34,19 +34,19 @@ namespace SFMLGame.Game
         {
             Position += Velocity * time;
 
-            if (Position.X < radius && Velocity.X < 0)
+            if (Position.X < Radius && Velocity.X < 0)
             {
                 BounceX();
             }
-            if(Position.Y < radius && Velocity.Y < 0)
+            if(Position.Y < Radius && Velocity.Y < 0)
             {
                 BounceY();
             }
-            if(Position.X > windowSize.X - radius && Velocity.X > 0)
+            if(Position.X > windowSize.X - Radius && Velocity.X > 0)
             {
                 BounceX();
             }
-            if(Position.Y > windowSize.Y - radius && Velocity.Y > 0)
+            if(Position.Y > windowSize.Y - Radius && Velocity.Y > 0)
             {
                 BounceY();
             }
