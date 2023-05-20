@@ -46,17 +46,13 @@ namespace SFMLGame.Game
         }
         public void Update(float time)
         {
-            circle.Position += circle.Velocity * time;
-            player1.Position += player1.Velocity * time;
-            player2.Position += player2.Velocity * time;
-
             player1ScoreText.DisplayedString = "Player1: " + player1.Score;
             player2ScoreText.DisplayedString = "Player2: " + player2.Score;
 
-            circle.Update();
+            circle.Update(time);
 
-            player1.Update();
-            player2.Update();
+            player1.Update(time);
+            player2.Update(time);
 
 
             if (circle.CollidesWith(player1) && circle.Velocity.X < 0)

@@ -30,9 +30,11 @@ namespace SFMLGame.Game
             Mesh.Position = new Vector2f(400, 300);
         }
 
-        public void Update()
+        public void Update(float time)
         {
-            if(Position.X < radius && Velocity.X < 0)
+            Position += Velocity * time;
+
+            if (Position.X < radius && Velocity.X < 0)
             {
                 BounceX();
             }

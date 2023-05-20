@@ -46,9 +46,10 @@ namespace SFMLGame.Game
             windowSize = window.Size;
         }
 
-        public void Update()
+        public void Update(float time)
         {
-            if(Position.Y < 90f)
+            Position += Velocity * time;
+            if (Position.Y < 90f)
             {
                 Position = new Vector2f(coordinateX, 90f);
             }
