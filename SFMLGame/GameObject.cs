@@ -3,7 +3,7 @@ using SFML.Graphics;
 
 namespace SFMLGame
 {
-    class GameObject
+    public class GameObject
     {
         private Vector2f position = new Vector2f(0, 0);
         public Vector2f Position
@@ -15,7 +15,7 @@ namespace SFMLGame
         public Vector2f Velocity = new Vector2f(0, 0);
 
         public Shape Mesh;
-        
+
         private RenderWindow scene;
 
         public GameObject(RenderWindow window)
@@ -28,4 +28,5 @@ namespace SFMLGame
             scene.Draw(Mesh);
         }
     }
+
 }

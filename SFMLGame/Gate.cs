@@ -9,10 +9,8 @@ namespace SFMLGame
 
         public RectangleShape shape;
 
-        public Gate(Player _opponent, bool left, Color color, RenderWindow window) : base(window)
+        public Gate(bool left, Color color, RenderWindow window) : base(window)
         {
-            opponent = _opponent;
-
             shape = new RectangleShape(new Vector2f(10f, window.Size.Y));
             if (left)
             {
@@ -27,10 +25,6 @@ namespace SFMLGame
             shape.FillColor = color;
 
             Mesh = shape;
-        }
-        public void PlayerScored()
-        {
-            opponent.Score++;
         }
     }
 }

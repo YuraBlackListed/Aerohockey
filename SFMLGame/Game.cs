@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using MyExtensionMethods;
 using TextExtentionMethods;
+using GameObjectExtentionMethods;
 
 namespace SFMLGame
 {
@@ -23,9 +24,6 @@ namespace SFMLGame
 
         private RenderWindow scene;
 
-        private float bounceTimer;
-        private bool counting;
-
         public Game(RenderWindow window)
         {
             scene = window;
@@ -40,25 +38,14 @@ namespace SFMLGame
             player1ScoreText = player1ScoreText.SetupText("Player 1: 0", font, Color.White, 24, new Vector2f(100, 100));
             player2ScoreText = player2ScoreText.SetupText("Player 2: 0", font, Color.White, 24, new Vector2f(scene.Size.X - 300, 100));
 
-            player1 = new Player(Color.Yellow, false, scene);
-            player2 = new Player(Color.Blue, true, scene);
+            player1 = new Player(Color.Yellow, true, scene);
+            player2 = new Player(Color.Blue, false, scene);
 
-            gate1 = new Gate(player2, true, Color.Green, scene);
-            gate2 = new Gate(player1, false, Color.Green, scene);
-
-            bounceTimer = 0;
+            gate1 = new Gate(true, Color.Green, scene);
+            gate2 = new Gate(false, Color.Green, scene);
         }
         public void Update(float time)
         {
-            if(counting)
-            {
-                bounceTimer += time;
-                if (bounceTimer >= 1)
-                {
-                    bounceTimer = 0;
-                    counting = false;
-                }
-            }
             circle.Position += circle.Velocity * time;
             player1.Position += player1.Velocity * time;
             player2.Position += player2.Velocity * time;
@@ -72,40 +59,24 @@ namespace SFMLGame
             player2.Update();
 
 
-            if (circle.Mesh.GetGlobalBounds().Intersects(player1.Mesh.GetGlobalBounds()))
+            if (circle.CollidesWith(player1) && circle.Velocity.X < 0)
             {
-                if(!counting)
-                {
-                    circle.BounceX();
-                    circle.BounceY();
-                    counting = true;
-                }
+                circle.BounceX();
             }
-            else if (circle.Mesh.GetGlobalBounds().Intersects(player2.Mesh.GetGlobalBounds()))
+            else if (circle.CollidesWith(player2) && circle.Velocity.X > 0)
             {
-                if (!counting)
-                {
-                    circle.BounceX();
-                    circle.BounceY();
-                    counting = true;
-                }
+                circle.BounceX();
             }
 
-            if (circle.Mesh.GetGlobalBounds().Intersects(gate1.Mesh.GetGlobalBounds()))
+            if (circle.CollidesWith(gate1) && circle.Velocity.X < 0)
             {
-                if (!counting)
-                {
-                    gate1.PlayerScored();
-                    counting = true;
-                }
+                circle.BounceX();
+                player2.Score++;
             }
-            else if (circle.Mesh.GetGlobalBounds().Intersects(gate2.Mesh.GetGlobalBounds()))
+            else if (circle.CollidesWith(gate2) && circle.Velocity.X > 0)
             {
-                if (!counting)
-                {
-                    gate2.PlayerScored();
-                    counting = true;
-                }
+                circle.BounceX();
+                player1.Score++;
             }
         }
         public void CheckInput()
