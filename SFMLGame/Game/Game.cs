@@ -1,10 +1,10 @@
 ﻿using SFML.System;
 using SFML.Graphics;
-using MyExtensionMethods;
-using TextExtentionMethods;
-using GameObjectExtentionMethods;
+using ExtensionMethods.FontExtentionMethods;
+using ExtensionMethods.TextExtentionMethods;
+using ExtensionMethods.GameObjectExtentionMethods;
 
-namespace SFMLGame
+namespace SFMLGame.Game
 {
     class Game
     {

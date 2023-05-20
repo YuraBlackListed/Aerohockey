@@ -1,10 +1,8 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
-using System.IO;
 
-
-namespace SFMLGame
+namespace SFMLGame.Engine
 {
     class GameLoop
     {
@@ -17,7 +15,7 @@ namespace SFMLGame
 
         private Clock clock = new Clock();
 
-        private Game game;
+        private Game.Game game;
 
         public void Run()
         {
@@ -36,7 +34,7 @@ namespace SFMLGame
             scene = new RenderWindow(new VideoMode(windiwWidth, windowHeight), "Game window");
             scene.DispatchEvents();
 
-            game = new Game(scene);
+            game = new Game.Game(scene);
             game.Start();
         }
 
@@ -53,7 +51,6 @@ namespace SFMLGame
 
             scene.Draw(game.player1ScoreText);
             scene.Draw(game.player2ScoreText);
-
 
             game.Render();
 

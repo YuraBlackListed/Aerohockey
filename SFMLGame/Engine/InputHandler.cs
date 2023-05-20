@@ -1,6 +1,6 @@
 ﻿using SFML.Window;
 
-namespace SFMLGame
+namespace SFMLGame.Engine
 {
     class InputHandler
     {

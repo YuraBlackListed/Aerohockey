@@ -1,7 +1,7 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 
-namespace TextExtentionMethods
+namespace ExtensionMethods.TextExtentionMethods
 {
     public static class TextExtentionMethods
     {

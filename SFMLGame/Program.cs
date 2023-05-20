@@ -1,4 +1,5 @@
-﻿
+﻿using SFMLGame.Engine;
+
 namespace SFMLGame
 {
     class Program

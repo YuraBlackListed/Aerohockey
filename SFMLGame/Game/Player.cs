@@ -1,8 +1,9 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
+using SFMLGame.Engine;
 
-namespace SFMLGame
+namespace SFMLGame.Game
 {
     class Player : GameObject
     {

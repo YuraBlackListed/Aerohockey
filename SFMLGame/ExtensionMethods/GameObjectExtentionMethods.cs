@@ -1,6 +1,6 @@
-﻿using SFMLGame;
+﻿using SFMLGame.Engine;
 
-namespace GameObjectExtentionMethods
+namespace ExtensionMethods.GameObjectExtentionMethods
 {
     public static class GameObjectExtentionMethods
     {

@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 using System.IO;
 
-namespace MyExtensionMethods
+namespace ExtensionMethods.FontExtentionMethods
 {
     public static class FontExtentionMethods
     {

@@ -1,7 +1,8 @@
 ﻿using SFML.System;
 using SFML.Graphics;
+using SFMLGame.Engine;
 
-namespace SFMLGame
+namespace SFMLGame.Game
 {
     class Gate : GameObject
     {

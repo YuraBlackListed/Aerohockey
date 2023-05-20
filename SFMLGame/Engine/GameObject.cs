@@ -1,7 +1,7 @@
 ﻿using SFML.System;
 using SFML.Graphics;
 
-namespace SFMLGame
+namespace SFMLGame.Engine
 {
     public class GameObject
     {
