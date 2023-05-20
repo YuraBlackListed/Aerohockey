@@ -17,7 +17,7 @@ namespace SFMLGame.Game
         public Player Player1;
         public Player Player2;
 
-        public Circle Pircle;
+        public Circle Сircle;
 
         public Gate Gate1;
         public Gate Gate2;
@@ -31,7 +31,7 @@ namespace SFMLGame.Game
 
         public void Start()
         {
-            Pircle = new Circle(50, scene.Size, scene);
+            Сircle = new Circle(50, scene.Size, scene);
 
             font = font.LoadFromFile(fontName);
 
@@ -49,29 +49,29 @@ namespace SFMLGame.Game
             Player1ScoreText.DisplayedString = "Player1: " + Player1.Score;
             Player2ScoreText.DisplayedString = "Player2: " + Player2.Score;
 
-            Pircle.Update(time);
+            Сircle.Update(time);
 
             Player1.Update(time);
             Player2.Update(time);
 
 
-            if (Pircle.CollidesWith(Player1) && Pircle.Velocity.X < 0)
+            if (Сircle.CollidesWith(Player1) && Сircle.Velocity.X < 0)
             {
-                Pircle.BounceX();
+                Сircle.BounceX();
             }
-            else if (Pircle.CollidesWith(Player2) && Pircle.Velocity.X > 0)
+            else if (Сircle.CollidesWith(Player2) && Сircle.Velocity.X > 0)
             {
-                Pircle.BounceX();
+                Сircle.BounceX();
             }
 
-            if (Pircle.CollidesWith(Gate1) && Pircle.Velocity.X < 0)
+            if (Сircle.CollidesWith(Gate1) && Сircle.Velocity.X < 0)
             {
-                Pircle.BounceX();
+                Сircle.BounceX();
                 Player2.Score++;
             }
-            else if (Pircle.CollidesWith(Gate2) && Pircle.Velocity.X > 0)
+            else if (Сircle.CollidesWith(Gate2) && Сircle.Velocity.X > 0)
             {
-                Pircle.BounceX();
+                Сircle.BounceX();
                 Player1.Score++;
             }
         }
@@ -82,7 +82,7 @@ namespace SFMLGame.Game
         }
         public void Render()
         {
-            Pircle.Draw();
+            Сircle.Draw();
             Player1.Draw();
             Player2.Draw();
             Gate1.Draw();
