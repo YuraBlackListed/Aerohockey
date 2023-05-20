@@ -30,7 +30,7 @@ namespace SFMLGame
         }
         public void PlayerScored()
         {
-            opponent.score++;
+            opponent.Score++;
         }
     }
 }

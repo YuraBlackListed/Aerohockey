@@ -6,42 +6,41 @@ namespace SFMLGame
 {
     class Player : GameObject
     {
-        public int score = 0;
+        public int Score = 0;
 
         private float coordinateX;
 
-        private Keyboard.Key up;
-        private Keyboard.Key down;
-
-        public RectangleShape shape;
+        public RectangleShape Shape;
 
         private Vector2u windowSize;
 
-        public float shapeSizeX = 30f;
-        public float shapeSizeY = 100f;
+        public float ShapeSizeX = 30f;
+        public float ShapeSizeY = 100f;
+
+        private InputHandler inputHandler;
 
         public Player(Color color, bool left, RenderWindow window) : base(window)
         {
-            shape = new RectangleShape(new Vector2f(shapeSizeX, shapeSizeY));
+            Shape = new RectangleShape(new Vector2f(ShapeSizeX, ShapeSizeY));
             if (left)
             {
                 coordinateX = 50f;
-                shape.Position = new Vector2f(coordinateX, 300);
-                up = Keyboard.Key.W;
-                down = Keyboard.Key.S;
+                Shape.Position = new Vector2f(coordinateX, 300);
+
+                inputHandler = new InputHandler(Keyboard.Key.W, Keyboard.Key.S);
             }
             else
             {
                 coordinateX = window.Size.X - 50f;
-                shape.Position = new Vector2f(window.Size.X - 50f, 300);
-                up = Keyboard.Key.Up;
-                down = Keyboard.Key.Down;
+                Shape.Position = new Vector2f(coordinateX, 300);
+
+                inputHandler = new InputHandler(Keyboard.Key.Up, Keyboard.Key.Down);
             }
-            shape.Origin = new Vector2f(shape.Size.X / 2f, shape.Size.Y / 2f);
+            Shape.Origin = new Vector2f(Shape.Size.X / 2f, Shape.Size.Y / 2f);
 
-            shape.FillColor = color;
+            Shape.FillColor = color;
 
-            Mesh = shape;
+            Mesh = Shape;
 
             windowSize = window.Size;
         }
@@ -59,18 +58,7 @@ namespace SFMLGame
         }
         public void CheckInput()
         {
-            if (Keyboard.IsKeyPressed(up))
-            {
-                Velocity.Y = -300f;
-            }
-            else if (Keyboard.IsKeyPressed(down))
-            {
-                Velocity.Y = 300f;
-            }
-            else
-            {
-                Velocity.Y = 0;
-            }
+            Velocity.Y = inputHandler.HandleInput();
         }
     }
 }

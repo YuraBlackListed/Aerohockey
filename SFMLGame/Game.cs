@@ -63,8 +63,8 @@ namespace SFMLGame
             player1.Position += player1.Velocity * time;
             player2.Position += player2.Velocity * time;
 
-            player1ScoreText.DisplayedString = "Player1: " + player1.score;
-            player2ScoreText.DisplayedString = "Player2: " + player2.score;
+            player1ScoreText.DisplayedString = "Player1: " + player1.Score;
+            player2ScoreText.DisplayedString = "Player2: " + player2.Score;
 
             circle.Update();
 
